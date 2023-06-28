@@ -1,12 +1,20 @@
 <template>
-  <div class="start" :class="{ end: isModal }">
+  <!-- <div class="start" :class="{ end: isModal }">
     <Modal
       :isModal="isModal"
       :products="products"
       :productIdx="productIdx"
       @closeBtn="isModal = false"
     />
-  </div>
+  </div> -->
+  <transition name="fade">
+    <Modal
+      :isModal="isModal"
+      :products="products"
+      :productIdx="productIdx"
+      @closeBtn="isModal = false"
+    />
+  </transition>
 
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
@@ -84,12 +92,22 @@ div {
   padding: 10px;
 }
 
-.start {
+/* .start {
   opacity: 0;
   transition: all 0.3s;
 }
 
 .end {
+  opacity: 1;
+} */
+
+.fade-enter-from {
+  opacity: 0;
+}
+.fade-enter-active {
+  transition: all 0.3s;
+}
+.fade-enter-to {
   opacity: 1;
 }
 </style>
