@@ -22,6 +22,15 @@
 
   <Discount />
 
+  <button @click="priceSort('Reset')" style="margin-right: 10px">초기화</button>
+  <button @click="priceSort('LowerPrice')" style="margin-right: 10px">
+    가격 낮은순
+  </button>
+  <button @click="priceSort('UpperPrice')" style="margin-right: 10px">
+    가격 높은순
+  </button>
+  <button @click="priceSort('RoomTitle')">이름순</button>
+
   <Card
     v-for="(item, i) in products"
     :data="item"
@@ -43,6 +52,7 @@ export default {
     return {
       menus: ["Home", "Products", "About"],
       products: productList,
+      productsOrg: [...productList], // 원본 데이터 보존
       isModal: false,
       productIdx: 0,
     };
@@ -59,6 +69,17 @@ export default {
     openModal(e) {
       this.isModal = true;
       this.productIdx = e;
+    },
+    priceSort(type) {
+      if (type === "Reset") {
+        this.products = [...this.productsOrg];
+      } else if (type === "LowerPrice") {
+        this.products.sort((a, b) => a.price - b.price);
+      } else if (type === "UpperPrice") {
+        this.products.sort((a, b) => b.price - a.price);
+      } else {
+        this.products.sort((a, b) => (a.title > b.title ? 1 : -1));
+      }
     },
   },
 };
