@@ -4,7 +4,11 @@
       <h4>{{ products[productIdx].title }}</h4>
       <img :src="products[productIdx].image" style="width: 100%" />
       <p>{{ products[productIdx].content }}</p>
-      <p>{{ products[productIdx].price.toLocaleString() }}원</p>
+      <input v-model="month" style="width: 30px" /> 개월
+      <p>
+        {{ month }}개월 입력함 :
+        {{ (products[productIdx].price * month).toLocaleString() }}원
+      </p>
       <button @click="closeModalBtn()">닫기</button>
     </div>
   </div>
@@ -13,6 +17,11 @@
 <script>
 export default {
   name: "Modal",
+  data() {
+    return {
+      month: 1,
+    };
+  },
   props: {
     isModal: Boolean,
     products: Array,
@@ -20,7 +29,7 @@ export default {
   },
   methods: {
     closeModalBtn() {
-      this.$emit('closeBtn')
+      this.$emit("closeBtn");
     },
   },
 };
