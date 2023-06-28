@@ -1,43 +1,43 @@
 <template>
-  <div v-if="isModal" class="black-bg">
-    <div class="white-bg">
-      <h4>상세페이지</h4>
-      <p>내용</p>
-      <button class="closeBtn" @click="isModal = false">닫기</button>
-    </div>
-  </div>
+  <Modal :isModal="isModal" :products="products" :productIdx="productIdx" />
 
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
 
-  <div v-for="(data, i) in products" :key="i">
-    <img class="room-img" :src="data.image" />
-    <h4 class="room-title" @click="showModal()">{{ data.title }}</h4>
-    <p>{{ data.price }}원</p>
-    <button @click="increase(i)">허위매물신고</button>
-    <span> 신고수 : {{ data.count }}</span>
-  </div>
+  <Discount />
+
+  <Card :data="item" v-for="(item, i) in products" :key="i" />
 </template>
 
 <script>
-import data from "./assets/oneroom.js";
+import productList from "./assets/oneroom.js";
+import Discount from "./components/Discount.vue";
+import Modal from "./components/Modal.vue";
+import Card from "./components/Card.vue";
+
 export default {
   name: "App",
   data() {
     return {
       menus: ["Home", "Products", "About"],
-      products: data,
+      products: productList,
       isModal: false,
+      productIdx: 0,
     };
   },
-  components: {},
+  components: {
+    Discount,
+    Modal,
+    Card,
+  },
   methods: {
     increase(idx) {
       this.products[idx].count++;
     },
-    showModal() {
+    showModal(idx) {
       this.isModal = true;
+      this.productIdx = idx;
     },
   },
 };
@@ -50,21 +50,6 @@ body {
 
 div {
   box-sizing: border-box;
-}
-
-.black-bg {
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  padding: 20px;
-}
-
-.white-bg {
-  width: 100%;
-  background: white;
-  border-radius: 8px;
-  padding: 20px;
 }
 
 #app {
@@ -80,16 +65,9 @@ div {
   padding: 15px;
   border-radius: 5px;
 }
+
 .menu a {
   color: white;
   padding: 10px;
-}
-.room-title,
-button {
-  cursor: pointer;
-}
-.room-img {
-  width: 100%;
-  margin-top: 40px;
 }
 </style>
