@@ -103,11 +103,23 @@ div {
 
 .fade-enter-from {
   opacity: 0;
+  /* transform: translateY(-1000px); */
 }
 .fade-enter-active {
-  transition: all 0.3s;
+  transition: all 0.5s;
 }
 .fade-enter-to {
   opacity: 1;
+  /* transform: translateY(0px); */
+}
+
+.fade-leave-from {
+  opacity: 1;
+}
+.fade-leave-active {
+  transition: all 0.5s;
+}
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
