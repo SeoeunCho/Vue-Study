@@ -1,10 +1,12 @@
 <template>
-  <Modal
-    :isModal="isModal"
-    :products="products"
-    :productIdx="productIdx"
-    @closeBtn="isModal = false"
-  />
+  <div class="start" :class="{ end: isModal }">
+    <Modal
+      :isModal="isModal"
+      :products="products"
+      :productIdx="productIdx"
+      @closeBtn="isModal = false"
+    />
+  </div>
 
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
@@ -80,5 +82,14 @@ div {
 .menu a {
   color: white;
   padding: 10px;
+}
+
+.start {
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.end {
+  opacity: 1;
 }
 </style>
