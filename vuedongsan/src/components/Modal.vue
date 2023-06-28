@@ -5,7 +5,7 @@
       <img :src="products[productIdx].image" style="width: 100%" />
       <p>{{ products[productIdx].content }}</p>
       <p>{{ products[productIdx].price.toLocaleString() }}원</p>
-      <!-- <button class="closeBtn" @click="closeModal()">닫기</button> -->
+      <button @click="closeModalBtn()">닫기</button>
     </div>
   </div>
 </template>
@@ -19,9 +19,9 @@ export default {
     productIdx: Number,
   },
   methods: {
-    // closeModal() {
-    //   props.isModal = false;
-    // },
+    closeModalBtn() {
+      this.$emit('closeBtn')
+    },
   },
 };
 </script>

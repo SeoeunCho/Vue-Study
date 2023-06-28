@@ -1,5 +1,10 @@
 <template>
-  <Modal :isModal="isModal" :products="products" :productIdx="productIdx" />
+  <Modal
+    :isModal="isModal"
+    :products="products"
+    :productIdx="productIdx"
+    @closeBtn="isModal = false"
+  />
 
   <div class="menu">
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
@@ -7,7 +12,13 @@
 
   <Discount />
 
-  <Card :data="item" v-for="(item, i) in products" :key="i" />
+  <Card
+    v-for="(item, i) in products"
+    :data="item"
+    :key="i"
+    @openModal="openModal(i)"
+    @increase="increase(i)"
+  />
 </template>
 
 <script>
@@ -35,7 +46,7 @@ export default {
     increase(idx) {
       this.products[idx].count++;
     },
-    showModal(idx) {
+    openModal(idx) {
       this.isModal = true;
       this.productIdx = idx;
     },
