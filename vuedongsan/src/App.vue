@@ -16,8 +16,8 @@
     v-for="(item, i) in products"
     :data="item"
     :key="i"
-    @openModal="openModal(i)"
-    @increase="increase(i)"
+    @openModal="openModal($event)"
+    @increase="increase($event)"
   />
 </template>
 
@@ -43,12 +43,12 @@ export default {
     Card,
   },
   methods: {
-    increase(idx) {
-      this.products[idx].count++;
+    increase(e) {
+      this.products[e].count++;
     },
-    openModal(idx) {
+    openModal(e) {
       this.isModal = true;
-      this.productIdx = idx;
+      this.productIdx = e;
     },
   },
 };

@@ -16,10 +16,10 @@ export default {
   },
   methods: {
     openModal() {
-      this.$emit("openModal");
+      this.$emit("openModal", this.data.id);
     },
     increase() {
-      this.$emit("increase");
+      this.$emit("increase", this.data.id);
     },
   },
 };
