@@ -22,6 +22,15 @@ export default {
       month: 1,
     };
   },
+  watch: {
+    month(newVal, oldVal) {
+      let blank = /\s/;
+      if (isNaN(newVal) || blank.exec(newVal)) {
+        alert("숫자를 입력해주세요.");
+        this.month = oldVal;
+      }
+    },
+  },
   props: {
     isModal: Boolean,
     products: Array,
@@ -30,6 +39,7 @@ export default {
   methods: {
     closeModalBtn() {
       this.$emit("closeBtn");
+      this.month = 1;
     },
   },
 };
