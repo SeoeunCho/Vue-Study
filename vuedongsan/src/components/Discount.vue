@@ -1,12 +1,15 @@
 <template>
   <div class="discount">
-    <h4>지금 결제하면 20% 할인!</h4>
+    <h4>지금 결제하면 {{ amount }}% 할인!</h4>
   </div>
 </template>
 
 <script>
 export default {
   name: "Discount",
+  props: {
+    amount: Number,
+  },
 };
 </script>
 
@@ -14,7 +17,7 @@ export default {
 .discount {
   background: #eee;
   padding: 10px;
-  margin: 10px;
+  margin: 10px 10px 0 10px;
   border-radius: 5px;
 }
 </style>

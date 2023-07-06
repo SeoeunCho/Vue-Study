@@ -20,9 +20,14 @@
     <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
 
-  <Discount />
+  <Discount v-if="showDiscount" :amount="amount" />
 
-  <button @click="priceSort('Reset')" style="margin-right: 10px">초기화</button>
+  <button
+    @click="priceSort('Reset')"
+    style="margin-top: 40px; margin-right: 10px"
+  >
+    초기화
+  </button>
   <button @click="priceSort('LowerPrice')" style="margin-right: 10px">
     가격 낮은순
   </button>
@@ -52,15 +57,27 @@ export default {
     return {
       menus: ["Home", "Products", "About"],
       products: productList,
-      productsOrg: [...productList], // 원본 데이터 보존
+      productsOrg: [...productList], // 원본 데이터 보존 : Array,Object는 [...Array/Object]로 개별보존 가능
       isModal: false,
       productIdx: 0,
+      amount: 30,
+      showDiscount: true,
     };
   },
   components: {
     Discount,
     Modal,
     Card,
+  },
+  // 1. create : 데이터만 존재하는 단계
+  // 2. mount : <template> 사이에 있던 걸 HTML로 바꿔줌 = DOM 구조 생성
+  // 3. 컴포넌트 생성 : index.html에 장착
+  // 4. update : 데이터가 변경됐을때 컴포넌트가 재랜더링 되는 과정
+  // 5. unmount : 컴포넌트가 삭제됐을 때
+  mounted() {
+    setInterval(() => {
+      if (this.amount > 0) this.amount--;
+    }, 1000);
   },
   methods: {
     increase(e) {
