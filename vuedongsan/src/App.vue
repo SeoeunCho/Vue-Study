@@ -1,5 +1,6 @@
 <template>
-  <!-- <div class="start" :class="{ end: isModal }">
+  <div>
+    <!-- <div class="start" :class="{ end: isModal }">
     <Modal
       :isModal="isModal"
       :products="products"
@@ -7,42 +8,43 @@
       @closeBtn="isModal = false"
     />
   </div> -->
-  <transition name="fade">
-    <Modal
-      :isModal="isModal"
-      :products="products"
-      :productIdx="productIdx"
-      @closeBtn="isModal = false"
+    <transition name="fade">
+      <Modal
+        :isModal="isModal"
+        :products="products"
+        :productIdx="productIdx"
+        @closeBtn="isModal = false"
+      />
+    </transition>
+
+    <div class="menu">
+      <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
+    </div>
+
+    <Discount v-if="showDiscount" :amount="amount" />
+
+    <button
+      @click="priceSort('Reset')"
+      style="margin-top: 40px; margin-right: 10px"
+    >
+      초기화
+    </button>
+    <button @click="priceSort('LowerPrice')" style="margin-right: 10px">
+      가격 낮은순
+    </button>
+    <button @click="priceSort('UpperPrice')" style="margin-right: 10px">
+      가격 높은순
+    </button>
+    <button @click="priceSort('RoomTitle')">이름순</button>
+
+    <Card
+      v-for="(item, i) in products"
+      :data="item"
+      :key="i"
+      @openModal="openModal($event)"
+      @increase="increase($event)"
     />
-  </transition>
-
-  <div class="menu">
-    <a v-for="(menu, i) in menus" :key="i">{{ menu }}</a>
   </div>
-
-  <Discount v-if="showDiscount" :amount="amount" />
-
-  <button
-    @click="priceSort('Reset')"
-    style="margin-top: 40px; margin-right: 10px"
-  >
-    초기화
-  </button>
-  <button @click="priceSort('LowerPrice')" style="margin-right: 10px">
-    가격 낮은순
-  </button>
-  <button @click="priceSort('UpperPrice')" style="margin-right: 10px">
-    가격 높은순
-  </button>
-  <button @click="priceSort('RoomTitle')">이름순</button>
-
-  <Card
-    v-for="(item, i) in products"
-    :data="item"
-    :key="i"
-    @openModal="openModal($event)"
-    @increase="increase($event)"
-  />
 </template>
 
 <script>
