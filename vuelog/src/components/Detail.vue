@@ -4,6 +4,7 @@
       <h4>상세페이지</h4>
       <h5>{{ writeData[$route.params.id].title }}</h5>
       <p>{{ writeData[$route.params.id].content }}</p>
+      <router-view></router-view>
     </div>
   </div>
 </template>
