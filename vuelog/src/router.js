@@ -13,9 +13,14 @@ const routes = [
     component: List,
   },
   {
-    path: "/detail",
+    path: "/detail/:id",
     component: Detail,
   },
+  // {
+  //   // 404페이지 : 위의 주소가 우선순위이기 떄문에 영향없음
+  //   path: "/:anything(.*)", // 모든 문자에대해서 체크
+  //   component: Home,
+  // },
 ];
 
 const router = createRouter({

@@ -33,11 +33,10 @@
       </div>
     </nav>
 
-    <router-link to="/" style="margin-right: 10px">홈페이지</router-link>
-    <router-link to="/list" style="margin-right: 10px"
-      >리스트페이지</router-link
-    >
-    <router-link to="/detail">디테일페이지</router-link>
+    <!-- <router-link to="/">홈페이지</router-link>
+    <router-link to="/list">리스트페이지</router-link>
+    <router-link to="/detail">디테일페이지</router-link> -->
+
     <router-view :writeData="writeData"></router-view>
 
     <!-- <List :writeData="writeData"></List> -->
