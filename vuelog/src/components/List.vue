@@ -1,8 +1,10 @@
 <template>
-  <div class="container mt-4">
-    <h5>{{ writeData.title }}</h5>
-    <p>{{ writeData.content }}</p>
-    <p>{{ writeData.data }}</p>
+  <div>
+    <div class="container mt-4" v-for="(data, i) in writeData" :key="i">
+      <h5>{{ data.title }}</h5>
+      <p>{{ data.content }}</p>
+      <p>{{ data.data }}</p>
+    </div>
   </div>
 </template>
 
@@ -10,7 +12,7 @@
 export default {
   name: "List",
   props: {
-    writeData: Object,
+    writeData: Array,
   },
 };
 </script>

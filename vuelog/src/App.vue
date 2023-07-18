@@ -2,7 +2,7 @@
   <div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" href="/">Vuelog</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -17,13 +17,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Features</a>
+              <a class="nav-link" href="/list">Writing</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Pricing</a>
+              <a class="nav-link" href="/detail">Detail</a>
             </li>
             <li class="nav-item">
               <a class="nav-link disabled">Disabled</a>
@@ -33,13 +33,20 @@
       </div>
     </nav>
 
-    <List v-for="(data, i) in writeData" :key="i" :writeData="data"></List>
+    <router-link to="/" style="margin-right: 10px">홈페이지</router-link>
+    <router-link to="/list" style="margin-right: 10px"
+      >리스트페이지</router-link
+    >
+    <router-link to="/detail">디테일페이지</router-link>
+    <router-view :writeData="writeData"></router-view>
+
+    <!-- <List :writeData="writeData"></List> -->
   </div>
 </template>
 
 <script>
-import List from "./components/List.vue";
 import writeData from "./assets/writeData.js";
+// import List from "./components/List.vue";
 
 export default {
   name: "App",
@@ -49,7 +56,7 @@ export default {
     };
   },
   components: {
-    List,
+    // List,
   },
 };
 </script>
