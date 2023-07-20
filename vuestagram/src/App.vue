@@ -11,6 +11,7 @@
     </div>
 
     <Container :postsData="postsData" />
+    <button @click="clickedMore">더보기</button>
 
     <div class="footer">
       <ul class="footer-button-plus">
@@ -24,16 +25,29 @@
 <script>
 import Container from "./components/Container.vue";
 import postingData from "./assets/postingData.js";
+import axios from "axios";
 
 export default {
   name: "App",
   data() {
     return {
       postsData: postingData,
+      moreCount: 0,
     };
   },
   components: {
     Container,
+  },
+  methods: {
+    clickedMore() {
+      axios
+        .get(`https://codingapple1.github.io/vue/more${this.moreCount}.json`)
+        .then((res) => {
+          this.postsData.push(res.data);
+          this.moreCount++;
+        })
+        .catch((err) => err);
+    },
   },
 };
 </script>
