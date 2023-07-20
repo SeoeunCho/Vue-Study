@@ -10,12 +10,13 @@
       <img src="./assets/logo.png" class="logo" />
     </div>
 
-    <Container :postsData="postsData" />
+    <Container :postsData="postsData" :step="step" :imgUrl="uploadImgUrl" />
     <button @click="clickedMore">더보기</button>
 
     <div class="footer">
       <ul class="footer-button-plus">
-        <input type="file" id="file" class="inputfile" />
+        <!-- multiple: 여러개업로드가능, accept="image/*" : input에서 이미지만선택가능하게 제한 -->
+        <input @change="uploadImg" type="file" id="file" class="inputfile" />
         <label for="file" class="input-plus">+</label>
       </ul>
     </div>
@@ -31,8 +32,10 @@ export default {
   name: "App",
   data() {
     return {
+      step: 0,
       postsData: postingData,
       moreCount: 0,
+      uploadImgUrl: "",
     };
   },
   components: {
@@ -47,6 +50,18 @@ export default {
           this.moreCount++;
         })
         .catch((err) => err);
+    },
+    uploadImg(e) {
+      let file = e.target.files;
+      if (!file[0].type.includes("image")) alert("이미지만 업로드 가능합니다.");
+      else {
+        this.uploadImgUrl = URL.createObjectURL(file[0]);
+        this.step++;
+      }
+
+      // 업로드한 파일을 띄워주는 방법
+      // 방법1 FileReader() : 파일을 글자로 변환해줌
+      // 방법2 URL.createObjectURL() : 이미지의 가상 URL을 생성해줌
     },
   },
 };
