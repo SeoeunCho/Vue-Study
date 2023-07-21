@@ -1,12 +1,12 @@
 import { createStore } from "vuex";
+import postingData from "./assets/postingData";
 
 const store = createStore({
   state() {
     return {
       name: "Cho",
       age: 20,
-      likes: 0,
-      liked: false,
+      postingData: postingData,
     };
   },
   mutations: {
@@ -16,16 +16,17 @@ const store = createStore({
     changeAge(state, payload) {
       state.age += payload;
     },
-    isLiked(state) {
-      if (!state.liked) {
-        state.likes++;
-        state.liked = true;
+    isLiked(state, idx) {
+      if (!state.postingData[idx].liked) {
+        state.postingData[idx].likes++;
+        state.postingData[idx].liked = true;
       } else {
-        state.likes--;
-        state.liked = false;
+        state.postingData[idx].likes--;
+        state.postingData[idx].liked = false;
       }
     },
   },
 });
 
 export default store;
+

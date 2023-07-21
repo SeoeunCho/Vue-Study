@@ -14,9 +14,9 @@
       ></div>
       <div class="post-content">
         <p>
-          {{ $store.state.likes }} Likes
-          <button class="like-btn" @click="$store.commit('isLiked')">
-            {{ !$store.state.liked ? "♡" : "♥" }}
+          {{ post.likes }} Likes
+          <button class="like-btn" @click="$store.commit('isLiked', idx)">
+            {{ !$store.state.postingData[idx].liked ? "♡" : "♥" }}
           </button>
         </p>
         <p>
@@ -36,6 +36,7 @@ export default {
   },
   props: {
     post: Object,
+    idx: Number,
   },
   methods: {},
 };

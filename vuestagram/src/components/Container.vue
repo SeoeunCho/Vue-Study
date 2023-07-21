@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="step === 0">
-      <Post v-for="(item, i) in postsData" :post="item" :key="i" />
+      <Post v-for="(item, i) in postsData" :post="item" :idx="i" :key="i" />
     </div>
 
     <!-- 필터선택페이지 -->
