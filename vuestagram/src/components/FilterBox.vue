@@ -2,6 +2,7 @@
   <div
     :class="`${filter} filter-item`"
     :style="`background-image: url(${imgUrl})`"
+    @click="fire()"
   >
     <!-- 1. slot 기본 -->
     <slot></slot>
@@ -26,7 +27,11 @@ export default {
     imgUrl: String,
     filter: String,
   },
-  methods: {},
+  methods: {
+    fire() {
+      this.emitter.emit("filter", this.filter);
+    },
+  },
 };
 </script>
 

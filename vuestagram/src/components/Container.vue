@@ -7,7 +7,7 @@
     <!-- 필터선택페이지 -->
     <div v-if="step === 1">
       <div
-        class="upload-image"
+        :class="`${filter} upload-image`"
         :style="{ backgroundImage: `url(${imgUrl})` }"
       ></div>
       <div class="filters">
@@ -32,7 +32,7 @@
     <!-- 글작성페이지 -->
     <div v-if="step === 2">
       <div
-        class="upload-image"
+        :class="`${filter} upload-image`"
         :style="{ backgroundImage: `url(${imgUrl})` }"
       ></div>
       <div class="write">
@@ -85,13 +85,13 @@ export default {
   watch: {
     content() {
       this.$emit("content", this.content);
-      console.log(this.content);
     },
   },
   props: {
     postsData: Array,
     step: Number,
     imgUrl: String,
+    filter: String,
   },
   components: {
     Post,

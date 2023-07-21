@@ -15,6 +15,7 @@
       :postsData="postsData"
       :step="step"
       :imgUrl="uploadImgUrl"
+      :filter="uploadFilter"
       @content="uploadContent = $event"
     />
     <button @click="clickedMore">더보기</button>
@@ -32,7 +33,6 @@
 <script>
 import Container from "./components/Container.vue";
 import postingData from "./assets/postingData.js";
-import axios from "axios";
 
 export default {
   name: "App",
@@ -45,14 +45,20 @@ export default {
       uploadUserName: "Cho Seoeun",
       uploadDate: "",
       uploadContent: "",
+      uploadFilter: "",
     };
+  },
+  mounted() {
+    this.emitter.on("filter", (name) => {
+      this.uploadFilter = name;
+    });
   },
   components: {
     Container,
   },
   methods: {
     clickedMore() {
-      axios
+      this.axios
         .get(`https://codingapple1.github.io/vue/more${this.moreCount}.json`)
         .then((res) => {
           this.postsData.push(res.data);
@@ -79,7 +85,6 @@ export default {
     },
     uploadPost() {
       this.step = 0;
-      console.log(this.step);
     },
     publish() {
       let uploadData = {
@@ -90,7 +95,7 @@ export default {
         date: this.uploadDate,
         liked: false,
         content: this.uploadContent,
-        filter: "perpetua",
+        filter: this.uploadFilter,
       };
       this.postsData.unshift(uploadData);
       this.step = 0;
