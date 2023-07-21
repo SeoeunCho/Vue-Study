@@ -11,6 +11,8 @@
       <img src="./assets/logo.png" class="logo" @click="step = 0" />
     </div>
 
+    <h4>안녕 {{ $store.state.name }}</h4>
+
     <Container
       :postsData="postsData"
       :step="step"
@@ -89,7 +91,7 @@ export default {
     publish() {
       let uploadData = {
         name: this.uploadUserName,
-        userImage: "https://picsum.photos/100?random=3",
+        userImage: "https://picsum.photos/100?random=6",
         postImage: this.uploadImgUrl,
         likes: 0,
         date: this.uploadDate,
