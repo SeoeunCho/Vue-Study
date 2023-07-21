@@ -12,6 +12,9 @@
     </div>
 
     <h4>안녕 {{ $store.state.name }}</h4>
+    <p>{{ $store.state.age }}</p>
+    <button @click="$store.commit('changeName')">이름변경버튼</button>
+    <button @click="$store.commit('changeAge', 10)">나이증가버튼</button>
 
     <Container
       :postsData="postsData"
