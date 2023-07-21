@@ -13,7 +13,12 @@
         :style="{ backgroundImage: `url(${post.postImage})` }"
       ></div>
       <div class="post-content">
-        <p>{{ post.likes }} Likes</p>
+        <p>
+          {{ $store.state.likes }} Likes
+          <button class="like-btn" @click="$store.commit('isLiked')">
+            {{ !$store.state.liked ? "♡" : "♥" }}
+          </button>
+        </p>
         <p>
           <strong>{{ post.name }}</strong> {{ post.content }}
         </p>
@@ -26,9 +31,13 @@
 <script>
 export default {
   name: "Post",
+  data() {
+    return {};
+  },
   props: {
     post: Object,
   },
+  methods: {},
 };
 </script>
 
@@ -65,6 +74,9 @@ export default {
   padding-left: 15px;
   padding-right: 15px;
   font-size: 14px;
+}
+.like-btn {
+  margin-left: 5px;
 }
 .date {
   font-size: 11px;
