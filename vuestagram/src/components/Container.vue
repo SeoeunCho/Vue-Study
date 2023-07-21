@@ -13,7 +13,7 @@
       <div class="filters">
         <div class="filter-box" v-for="(item, i) in filters" :key="i">
           <div class="filter-name">{{ item }}</div>
-          <FilterBox :imgUrl="imgUrl" :class="item"></FilterBox>
+          <FilterBox :imgUrl="imgUrl" :filter="item"></FilterBox>
         </div>
       </div>
     </div>

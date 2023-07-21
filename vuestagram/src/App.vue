@@ -8,7 +8,7 @@
         <li v-if="step === 1" @click="step++">다음</li>
         <li v-if="step === 2" @click="publish()">공유</li>
       </ul>
-      <img src="./assets/logo.png" class="logo" />
+      <img src="./assets/logo.png" class="logo" @click="step = 0" />
     </div>
 
     <Container
@@ -115,6 +115,7 @@ ul {
   left: 0;
   right: 0;
   top: 13px;
+  cursor: pointer;
 }
 .header {
   width: 100%;

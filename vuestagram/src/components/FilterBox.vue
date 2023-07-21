@@ -1,5 +1,8 @@
 <template>
-  <div class="filter-item" :style="`background-image: url(${imgUrl})`"></div>
+  <div
+    :class="`${filter} filter-item`"
+    :style="`background-image: url(${imgUrl})`"
+  ></div>
 </template>
 
 <script>
@@ -7,6 +10,7 @@ export default {
   name: "FilterBox",
   props: {
     imgUrl: String,
+    filter: String,
   },
 };
 </script>
