@@ -11,10 +11,21 @@
         :style="{ backgroundImage: `url(${imgUrl})` }"
       ></div>
       <div class="filters">
-        <div class="filter-box" v-for="(item, i) in filters" :key="i">
-          <div class="filter-name">{{ item }}</div>
-          <FilterBox :imgUrl="imgUrl" :filter="item"></FilterBox>
-        </div>
+        <FilterBox
+          v-for="(item, i) in filters"
+          :key="i"
+          :imgUrl="imgUrl"
+          :filter="item"
+        >
+          <!-- 1. slot 기본 -->
+          <span>{{ item }}</span>
+
+          <!-- 2. slot 네이밍이 있을때 : template 태그사용 -->
+          <!-- <template v-slot:filter>{{ item }}</template> -->
+
+          <!-- 3. slot props 문법 : 자식데이터를 부모로 전달 -->
+          <!-- <template v-slot:default="data">{{ data.msg }}</template> -->
+        </FilterBox>
       </div>
     </div>
 
@@ -95,14 +106,6 @@ export default {
   height: 450px;
   background: cornflowerblue;
   background-size: cover;
-}
-.filter-box {
-  display: inline-block;
-}
-.filter-name {
-  text-align: center;
-  color: #888;
-  margin-top: 20px;
 }
 .filters {
   overflow-x: scroll;
