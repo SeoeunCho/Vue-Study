@@ -11,11 +11,10 @@
         :style="{ backgroundImage: `url(${imgUrl})` }"
       ></div>
       <div class="filters">
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
-        <div class="filter-1"></div>
+        <div class="filter-box" v-for="(item, i) in filters" :key="i">
+          <div class="filter-name">{{ item }}</div>
+          <FilterBox :imgUrl="imgUrl" :class="item"></FilterBox>
+        </div>
       </div>
     </div>
 
@@ -26,7 +25,8 @@
         :style="{ backgroundImage: `url(${imgUrl})` }"
       ></div>
       <div class="write">
-        <textarea class="write-box">write!</textarea>
+        <textarea class="write-box" v-model="content"></textarea>
+        <!-- <textarea class="write-box" @input="$emit('content', $event.target.value)">문구입력...</textarea> -->
       </div>
     </div>
   </div>
@@ -34,9 +34,49 @@
 
 <script>
 import Post from "./Post.vue";
+import FilterBox from "./FilterBox.vue";
 
 export default {
   name: "Container",
+  data() {
+    return {
+      content: "문구입력...",
+      filters: [
+        "aden",
+        "_1977",
+        "brannan",
+        "brooklyn",
+        "clarendon",
+        "earlybird",
+        "gingham",
+        "hudson",
+        "inkwell",
+        "kelvin",
+        "lark",
+        "lofi",
+        "maven",
+        "mayfair",
+        "moon",
+        "nashville",
+        "perpetua",
+        "reyes",
+        "rise",
+        "slumber",
+        "stinson",
+        "toaster",
+        "valencia",
+        "walden",
+        "willow",
+        "xpro2",
+      ],
+    };
+  },
+  watch: {
+    content() {
+      this.$emit("content", this.content);
+      console.log(this.content);
+    },
+  },
   props: {
     postsData: Array,
     step: Number,
@@ -44,6 +84,7 @@ export default {
   },
   components: {
     Post,
+    FilterBox,
   },
 };
 </script>
@@ -54,6 +95,14 @@ export default {
   height: 450px;
   background: cornflowerblue;
   background-size: cover;
+}
+.filter-box {
+  display: inline-block;
+}
+.filter-name {
+  text-align: center;
+  color: #888;
+  margin-top: 20px;
 }
 .filters {
   overflow-x: scroll;

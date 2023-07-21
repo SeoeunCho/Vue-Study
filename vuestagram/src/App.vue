@@ -5,12 +5,18 @@
         <li>Cancel</li>
       </ul>
       <ul class="header-button-right">
-        <li>Next</li>
+        <li v-if="step === 1" @click="step++">다음</li>
+        <li v-if="step === 2" @click="publish()">공유</li>
       </ul>
       <img src="./assets/logo.png" class="logo" />
     </div>
 
-    <Container :postsData="postsData" :step="step" :imgUrl="uploadImgUrl" />
+    <Container
+      :postsData="postsData"
+      :step="step"
+      :imgUrl="uploadImgUrl"
+      @content="uploadContent = $event"
+    />
     <button @click="clickedMore">더보기</button>
 
     <div class="footer">
@@ -36,6 +42,9 @@ export default {
       postsData: postingData,
       moreCount: 0,
       uploadImgUrl: "",
+      uploadUserName: "Cho Seoeun",
+      uploadDate: "",
+      uploadContent: "",
     };
   },
   components: {
@@ -57,11 +66,34 @@ export default {
       else {
         this.uploadImgUrl = URL.createObjectURL(file[0]);
         this.step++;
+
+        let today = new Date();
+        let month = today.toLocaleString("en-US", { month: "short" });
+        let day = today.getDay();
+        this.uploadDate = month + " " + day;
       }
 
       // 업로드한 파일을 띄워주는 방법
       // 방법1 FileReader() : 파일을 글자로 변환해줌
       // 방법2 URL.createObjectURL() : 이미지의 가상 URL을 생성해줌
+    },
+    uploadPost() {
+      this.step = 0;
+      console.log(this.step);
+    },
+    publish() {
+      let uploadData = {
+        name: this.uploadUserName,
+        userImage: "https://picsum.photos/100?random=3",
+        postImage: this.uploadImgUrl,
+        likes: 0,
+        date: this.uploadDate,
+        liked: false,
+        content: this.uploadContent,
+        filter: "perpetua",
+      };
+      this.postsData.unshift(uploadData);
+      this.step = 0;
     },
   },
 };
@@ -103,9 +135,9 @@ ul {
 .header-button-right {
   color: skyblue;
   float: right;
-  width: 50px;
   cursor: pointer;
   margin-top: 10px;
+  margin-right: 10px;
 }
 .footer {
   width: 100%;
