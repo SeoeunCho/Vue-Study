@@ -38,7 +38,7 @@ const store = createStore({
   // context = store
   actions: {
     getData(context) {
-      axios.get("https://codingapple1.github.io/vue/more0.json", (res) => {
+      axios.get("https://codingapple1.github.io/vue/more0.json").then((res) => {
         context.commit("setMore", res.data);
       });
     },
