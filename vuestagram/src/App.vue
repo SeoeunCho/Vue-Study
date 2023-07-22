@@ -11,16 +11,6 @@
       <img src="./assets/logo.png" class="logo" @click="step = 0" />
     </div>
 
-    <!-- Vuex mutations
-    <h4>안녕 {{ $store.state.name }}</h4>
-    <p>{{ $store.state.age }}</p>
-    <button @click="$store.commit('changeName')">이름변경버튼</button>
-    <button @click="$store.commit('changeAge', 10)">나이증가버튼</button> -->
-
-    <!-- Vuex actions -->
-    <p>{{ $store.state.more }}</p>
-    <button @click="$store.dispatch('getData')">더보기버튼</button>
-
     <Container
       :postsData="postsData"
       :step="step"
@@ -29,6 +19,34 @@
       @content="uploadContent = $event"
     />
     <button @click="clickedMore">더보기</button>
+
+    <h4>methods : 함수 사용할 때마다 실행됨</h4>
+    <p>{{ now() }} {{ counter }}</p>
+    <button @click="counter++">버튼</button>
+    <h4>
+      computed : 처음 실행한 함수의 값을 간직함<br />
+      (데이터처럼 쓰이기 때문에 함수가 아님()쓰지 않음)
+    </h4>
+    <p>{{ now2 }} {{ counter }}</p>
+    <button @click="counter++">버튼</button>
+
+    <h4>Vuex mutations</h4>
+    <div style="display: flex">
+      <p style="margin-right: 10px">
+        안녕 {{ $store.state.name }}{{ $store.state.age }}
+      </p>
+      <p style="margin-right: 10px">안녕 {{ name }}{{ age }}{{ likes }}</p>
+      <p>{{ nameInStore }}</p>
+    </div>
+    <button @click="$store.commit('changeName')">이름변경버튼</button>
+    <button @click="changeName()">이름변경버튼2</button>
+    <button @click="$store.commit('changeAge', 10)">나이증가버튼</button>
+    <button @click="changeAge(10)">나이증가버튼2</button>
+
+    <h4>Vuex actions</h4>
+    <p>{{ $store.state.more }}</p>
+    <button @click="$store.dispatch('getData')">더보기버튼</button>
+    <button @click="getData()">더보기버튼2</button>
 
     <div class="footer">
       <ul class="footer-button-plus">
@@ -43,6 +61,7 @@
 <script>
 import Container from "./components/Container.vue";
 import postingData from "./assets/postingData.js";
+import { mapState, mapMutations, mapActions } from "vuex";
 
 export default {
   name: "App",
@@ -56,6 +75,7 @@ export default {
       uploadDate: "",
       uploadContent: "",
       uploadFilter: "",
+      counter: 0,
     };
   },
   mounted() {
@@ -66,7 +86,23 @@ export default {
   components: {
     Container,
   },
+  // computed : 처음 데이터 계산결과 저장공간, return 필수 / vuex의 데이터를 꺼내쓸때 좋음
+  computed: {
+    now2() {
+      return new Date();
+    },
+    // name() {
+    //   return this.$store.state.name;
+    // },
+    ...mapState(["name", "age", "likes"]),
+    ...mapState({ nameInStore: "name" }),
+  },
   methods: {
+    now() {
+      return new Date();
+    },
+    ...mapMutations(["changeName", "changeAge"]),
+    ...mapActions(["getData"]),
     clickedMore() {
       this.axios
         .get(`https://codingapple1.github.io/vue/more${this.moreCount}.json`)

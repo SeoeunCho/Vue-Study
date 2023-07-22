@@ -5,8 +5,8 @@ import axios from "axios";
 const store = createStore({
   state() {
     return {
-      //   name: "Cho",
-      //   age: 20,
+        name: "Cho",
+        age: 20,
       postingData: postingData,
       more: {},
     };
@@ -14,12 +14,12 @@ const store = createStore({
 
   // mutations : state를 변경할 때 / 동기적
   mutations: {
-    // changeName(state) {
-    //   state.name = "Park";
-    // },
-    // changeAge(state, payload) {
-    //   state.age += payload;
-    // },
+    changeName(state) {
+      state.name = "Park";
+    },
+    changeAge(state, payload) {
+      state.age += payload;
+    },
     isLiked(state, idx) {
       if (!state.postingData[idx].liked) {
         state.postingData[idx].likes++;
