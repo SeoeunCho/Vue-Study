@@ -3,6 +3,7 @@ import App from "./App.vue";
 import mitt from "mitt";
 import axios from "axios";
 import store from "./store.js";
+import './registerServiceWorker'
 
 let app = createApp(App);
 let emitter = mitt();
