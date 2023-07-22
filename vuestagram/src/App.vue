@@ -18,9 +18,9 @@
       :filter="uploadFilter"
       @content="uploadContent = $event"
     />
-    <button @click="clickedMore">더보기</button>
+    <button v-if="step === 0" @click="clickedMore">더보기</button>
 
-    <h4>methods : 함수 사용할 때마다 실행됨</h4>
+    <!-- <h4>methods : 함수 사용할 때마다 실행됨</h4>
     <p>{{ now() }} {{ counter }}</p>
     <button @click="counter++">버튼</button>
     <h4>
@@ -46,7 +46,7 @@
     <h4>Vuex actions</h4>
     <p>{{ $store.state.more }}</p>
     <button @click="$store.dispatch('getData')">더보기버튼</button>
-    <button @click="getData()">더보기버튼2</button>
+    <button @click="getData()">더보기버튼2</button> -->
 
     <div class="footer">
       <ul class="footer-button-plus">
@@ -67,7 +67,7 @@ export default {
   name: "App",
   data() {
     return {
-      step: 0,
+      step: 3,
       postsData: postingData,
       moreCount: 0,
       uploadImgUrl: "",

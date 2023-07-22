@@ -40,12 +40,17 @@
         <!-- <textarea class="write-box" @input="$emit('content', $event.target.value)">문구입력...</textarea> -->
       </div>
     </div>
+
+    <div v-if="step === 3">
+      <MyPage />
+    </div>
   </div>
 </template>
 
 <script>
 import Post from "./Post.vue";
 import FilterBox from "./FilterBox.vue";
+import MyPage from "./MyPage.vue";
 
 export default {
   name: "Container",
@@ -96,6 +101,7 @@ export default {
   components: {
     Post,
     FilterBox,
+    MyPage,
   },
 };
 </script>
